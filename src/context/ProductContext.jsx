@@ -1,8 +1,8 @@
-import { createContext, useContext, useEffect, useState } from "react"
-import { getProducts, addProduct, attProduct, getProductById, deleteProduct } from "../services/ProductsService"
+import { createContext, useEffect, useState } from "react"
+import { getProducts} from "../services/ProductsService"
 
 
-const ProductContext = createContext();
+export const ProductContext = createContext({});
 
 export const ProductProvider = ({ children }) => {
     const [products, setProducts] = useState([])
@@ -22,9 +22,9 @@ export const ProductProvider = ({ children }) => {
     }, [])
    
     return (
-        <ProductContext.Provider value={{ products, addProduct, updateProduct, deleteProduct, error }}>
+        <ProductContext.Provider value={{ products, error }}>
           {children}
         </ProductContext.Provider>
       );
     };
-    export const useProducts = () => useContext(ProductContext);
+

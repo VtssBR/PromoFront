@@ -4,7 +4,7 @@ export default function RootLayout(){
     return(
         <>
         <header>
-            <img src="" alt="logo" />
+           <Link to="/"><img src="" alt="logo" /></Link>
             <nav>
                 <input type="text" />
                 <Link to="/products/new"><button>Postar  Promocao</button></Link>
