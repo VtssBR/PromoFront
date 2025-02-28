@@ -25,7 +25,7 @@ export const ProductProvider = ({ children }) => {
     const createProductState= async (productData) => {
         try {
             const createdProduct = await addProduct(productData)
-            setProducts = ((existentsProducts) => [...existentsProducts, createdProduct])
+            setProducts((existentsProducts) => [...existentsProducts, createdProduct])
         } catch (error) {
             setError(error.message);
         }

@@ -1,14 +1,14 @@
-import { RouterProvider } from "react-router-dom"
+import { RouterProvider } from "react-router-dom";
 import { ProductProvider } from "./context/ProductContext";
-import router from "./router"
+import { CategoryProvider } from "./context/CategoryContext";
+import router from "./router";
 
 export default function App() {
   return (
-    <>
-    <ProductProvider>
-      <RouterProvider router={router} />
-    </ProductProvider>
-    </>
-  )
+    <CategoryProvider> 
+      <ProductProvider>  
+        <RouterProvider router={router} />
+      </ProductProvider>
+    </CategoryProvider>
+  );
 }
-
