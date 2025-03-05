@@ -1,4 +1,4 @@
-const URL = "http://localhost:3000/api/products";
+const URL = "http://localhost:3000/api/products"; //Criar URL .env quando finalizado 
 
 export const getProducts = async () => {
     const response = await fetch(URL);

@@ -11,7 +11,7 @@ export default function ListProduct(){
         <div>
             {products.map((product)=>(
             <div key={product.id}>
-            <img src={product.image} alt=" Imagem" width={500} />
+            <img src={product.image} alt={product.title} width={250} />
             <h4>{product.title}</h4>
             <h4>{product.price}</h4>
             </div>
