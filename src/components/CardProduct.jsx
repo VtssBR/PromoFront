@@ -12,7 +12,7 @@ export default function CardProduct() {
         getProductByIdState(id);
     }, [id, getProductByIdState]);
 
-    if (!product) return <p>Carregando...</p>;
+    if (!product) return <p>Carregando...</p>; //Futuramente criar um componente de carregando
 
     return (
         <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
