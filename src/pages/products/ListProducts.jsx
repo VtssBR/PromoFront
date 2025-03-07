@@ -1,10 +1,10 @@
-import CardProduct from "../../components/CardProduct"
+import ListCardsProducts from "../../components/ListCardsProducts"
 
 export default function ListProduct() {
     return (
         <div>
             <h1>Listar</h1>
-            <CardProduct />
+            <ListCardsProducts />
         </div>
     )
 }

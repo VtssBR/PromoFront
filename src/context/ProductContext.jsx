@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react"
-import { addProduct, getProducts} from "../services/ProductsService"
+import { addProduct, getProducts, attProduct, getProductById} from "../services/ProductsService"
 
 
 export const ProductContext = createContext({});
@@ -7,6 +7,7 @@ export const ProductContext = createContext({});
 export const ProductProvider = ({ children }) => {
     const [products, setProducts] = useState([])
     const [error, setError] = useState(null);
+    
 
 
     useEffect(() => {
@@ -30,9 +31,33 @@ export const ProductProvider = ({ children }) => {
             setError(error.message);
         }
     }
+
+    const updateProductState = async (productUpdateData, id) =>{
+        try {
+            const updatedProduct = await attProduct(productUpdateData,id)
+            setProducts((existingProducts) =>
+                existingProducts.map((product) =>
+                    product.id === id ? updatedProduct : product
+                )
+            );
+        } catch (error) {
+            setError(error.message);
+        }
+    }
+
+    const getProductByIdState = async (id) =>{
+        try {
+            const product = await getProductById(id)
+            return product
+        } catch (error) {
+            setError(error.message);
+        }
+    }
+
+
    
     return (
-        <ProductContext.Provider value={{ products, error, createProductState}}>
+        <ProductContext.Provider value={{products,  error, createProductState, updateProductState, getProductByIdState,}}>
           {children}
         </ProductContext.Provider>
       );
