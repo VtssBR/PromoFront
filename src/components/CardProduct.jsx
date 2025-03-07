@@ -1,22 +1,18 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
 import { useParams } from "react-router-dom";
 import { ProductContext } from "../context/ProductContext"
 
 
 export default function CardProduct() {
-    const { getProductByIdState } = useContext(ProductContext)
-    const [product, setProduct] = useState({});
+    const { product, getProductByIdState } = useContext(ProductContext)
     const { id } = useParams();
 
 
     useEffect(() => {
-        const fetchProduct = async () => {
-            const product = await getProductByIdState(id);
-            setProduct(product);
-        };
-        fetchProduct();
+        getProductByIdState(id);
     }, [id, getProductByIdState]);
 
+    if (!product) return <p>Carregando...</p>;
 
     return (
         <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>

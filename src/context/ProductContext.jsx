@@ -6,6 +6,7 @@ export const ProductContext = createContext({});
 
 export const ProductProvider = ({ children }) => {
     const [products, setProducts] = useState([])
+    const [product, setProduct] = useState(null);
     const [error, setError] = useState(null);
     
 
@@ -45,19 +46,19 @@ export const ProductProvider = ({ children }) => {
         }
     }
 
-    const getProductByIdState = async (id) =>{
+    const getProductByIdState = async (id) => {
         try {
-            const product = await getProductById(id)
-            return product
+            const fetchedProduct = await getProductById(id);
+            setProduct(fetchedProduct);
         } catch (error) {
             setError(error.message);
         }
-    }
+    };
 
 
    
     return (
-        <ProductContext.Provider value={{products,  error, createProductState, updateProductState, getProductByIdState,}}>
+        <ProductContext.Provider value={{products, product,  error, createProductState, updateProductState, getProductByIdState,}}>
           {children}
         </ProductContext.Provider>
       );
