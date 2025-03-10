@@ -6,6 +6,7 @@ export const UserContext = createContext({})
 
 export const UserProvider = ({ children }) => {
     const [users, setUsers] = useState([])
+    const [user, setUser] = useState(null)
     const [erro, setError] = useState(null)
 
 
@@ -21,18 +22,28 @@ export const UserProvider = ({ children }) => {
             fetchData()
         }, [])
 
-    const createUserState = async (userData) => {
+    const createUserState = async (formData) => {
         try {
-            const newUser = await addUsers(userData)
+            const newUser = await addUsers(formData)
             setUsers((existentsProducts)=>{[...existentsProducts, newUser]})
         } catch (error) {
             setError(error.message)
         }
     }
 
+    const getUserByIdState = async(id) => {
+        try {
+            const userId  = await getUserById(id)
+            setUser(userId)
+        } catch (error) {
+            setError(error.message)
+        }
+
+    }
+
 
     return (
-        <UserContext.Provider value={{users, createUserState}}>
+        <UserContext.Provider value={{users, createUserState, getUserByIdState}}>
             {children}
         </UserContext.Provider>
     );

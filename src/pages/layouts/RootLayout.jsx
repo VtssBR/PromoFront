@@ -8,7 +8,7 @@ export default function RootLayout(){
             <nav>
                 <input type="text" />
                 <Link to="/products/new"><button>Postar  Promocao</button></Link>
-                <Link to="/login"><button>Area de Usuario</button></Link>
+                <Link to="/register"><button>Area de Usuario</button></Link>
             </nav>
         </header>
         <Outlet/>
