@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { getUsers, getUserById, addUsers, attUser, deleteUser } from "../services/UserService";
+import { getUsers, getUserById, loginUser, addUsers, attUser, deleteUser } from "../services/UserService";
 
 export const UserContext = createContext({})
 
@@ -11,29 +11,29 @@ export const UserProvider = ({ children }) => {
 
 
     useEffect(() => {
-            const fetchData = async () => {
-                try {
-                    const data = await getUsers()
-                    setUsers(data)
-                } catch (error) {
-                    setError(error.message);
-                }
+        const fetchData = async () => {
+            try {
+                const data = await getUsers()
+                setUsers(data)
+            } catch (error) {
+                setError(error.message);
             }
-            fetchData()
-        }, [])
+        }
+        fetchData()
+    }, [])
 
     const createUserState = async (formData) => {
         try {
             const newUser = await addUsers(formData)
-            setUsers((existentsProducts)=>{[...existentsProducts, newUser]})
+            setUsers((existentsProducts) => { [...existentsProducts, newUser] })
         } catch (error) {
             setError(error.message)
         }
     }
 
-    const getUserByIdState = async(id) => {
+    const getUserByIdState = async (id) => {
         try {
-            const userId  = await getUserById(id)
+            const userId = await getUserById(id)
             setUser(userId)
         } catch (error) {
             setError(error.message)
@@ -41,9 +41,21 @@ export const UserProvider = ({ children }) => {
 
     }
 
+    const loginUserState = async (formData) => {
+        try {
+            const { user, token } = await loginUser(formData); 
+            setUser(user); 
+            localStorage.setItem("token", token); 
+            return { user, token }; 
+        } catch (error) {
+            setError(error.message);
+            throw error;
+        }
+    }
+
 
     return (
-        <UserContext.Provider value={{users, createUserState, getUserByIdState}}>
+        <UserContext.Provider value={{ users, createUserState, getUserByIdState, loginUserState }}>
             {children}
         </UserContext.Provider>
     );

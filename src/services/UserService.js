@@ -1,4 +1,5 @@
 const URL = "http://localhost:3000/api/users" //Criar URL .env quando finalizado 
+const URLAUTH = "http://localhost:3000/api/authentication/login"
 
 export const getUsers = async () => {
     const response =  await fetch(URL)
@@ -23,6 +24,18 @@ export const getUserById = async (id) =>{
     })
     if (!response.ok) throw new Error("Erro ao buscar usuario");
     return response.json();
+}
+
+export const loginUser = async(userData) =>{
+    
+    const response = await fetch(URLAUTH,{
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData)
+    })
+    if (!response.ok) throw new Error("Erro ao fazer login");
+    return response.json();
+    
 }
 
 export const attUser = async (userUpdated, id) => {

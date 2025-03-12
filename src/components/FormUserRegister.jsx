@@ -27,7 +27,6 @@ export default function FormUserRegister() {
             name: formData.name,
             email: formData.email,
             password: formData.password,
-            role: "user"
         }
 
         createUserState(userData)
