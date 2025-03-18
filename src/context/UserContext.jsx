@@ -20,16 +20,21 @@ export const UserProvider = ({ children }) => {
             }
         }
         fetchData()
+
+        const token = localStorage.getItem("token");
+        if (token) {
+            setUser({ token });
+        }
     }, [])
 
     const createUserState = async (formData) => {
         try {
-            const newUser = await addUsers(formData)
-            setUsers((existentsProducts) => { [...existentsProducts, newUser] })
+            const newUser = await addUsers(formData);
+            setUsers((prevUsers) => [...prevUsers, newUser]);
         } catch (error) {
-            setError(error.message)
+            setError(error.message);
         }
-    }
+    };
 
     const getUserByIdState = async (id) => {
         try {
@@ -43,19 +48,24 @@ export const UserProvider = ({ children }) => {
 
     const loginUserState = async (formData) => {
         try {
-            const { user, token } = await loginUser(formData); 
-            setUser(user); 
-            localStorage.setItem("token", token); 
-            return { user, token }; 
+            const { user, token } = await loginUser(formData);
+            setUser(user);
+            localStorage.setItem("token", token);
+            return { user, token };
         } catch (error) {
             setError(error.message);
             throw error;
         }
     }
 
+    const logout = () => {
+        localStorage.removeItem("token");
+        setUser(null);
+    };
+
 
     return (
-        <UserContext.Provider value={{ users, createUserState, getUserByIdState, loginUserState }}>
+        <UserContext.Provider value={{ users, user, createUserState, getUserByIdState, loginUserState, logout }}>
             {children}
         </UserContext.Provider>
     );

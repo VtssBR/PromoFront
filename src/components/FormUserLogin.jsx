@@ -1,9 +1,11 @@
 import { useState, useContext } from 'react'
 import { UserContext } from '../context/UserContext'
+import {Link} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 export default function FormUserLogin() {
     const { loginUserState } = useContext(UserContext)
-
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         email: "",
@@ -37,6 +39,8 @@ export default function FormUserLogin() {
             email: "",
             password: ""
         })
+
+        navigate("/")
     };
 
     return (
@@ -51,6 +55,7 @@ export default function FormUserLogin() {
                 <input type="text" name='password' value={formData.password} onChange={handleInputChange} />
 
                 <button type='submit'>Entrar</button>
+                <Link to="/register"><p>Fazer cadastro</p></Link>
             </form>
         </>
     )
