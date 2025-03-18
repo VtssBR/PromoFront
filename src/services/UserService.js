@@ -1,5 +1,6 @@
 const URL = "http://localhost:3000/api/users" //Criar URL .env quando finalizado 
-const URLAUTH = "http://localhost:3000/api/authentication/login"
+const URLAUTHLOGIN = "http://localhost:3000/api/authentication/login"
+const URLAUTHREGISTER = "http://localhost:3000/api/authentication/register"
 
 export const getUsers = async () => {
     const response =  await fetch(URL)
@@ -8,7 +9,7 @@ export const getUsers = async () => {
 }
 
 export const addUsers = async (newUser) => {
-    const response = await fetch(URL, {
+    const response = await fetch(URLAUTHREGISTER, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser)
@@ -28,7 +29,7 @@ export const getUserById = async (id) =>{
 
 export const loginUser = async(userData) =>{
     
-    const response = await fetch(URLAUTH,{
+    const response = await fetch(URLAUTHLOGIN,{
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData)

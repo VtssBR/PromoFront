@@ -1,7 +1,7 @@
-import {useState, useContext} from 'react'
+import { useState, useContext } from 'react'
 import { UserContext } from '../context/UserContext'
 
-export default function FormUserLogin(){    
+export default function FormUserLogin() {
     const { loginUserState } = useContext(UserContext)
 
 
@@ -23,30 +23,35 @@ export default function FormUserLogin(){
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
+
         console.log("Dados enviados para login:", formData);
-        
+
         try {
             const response = await loginUserState(formData);
             console.log("Login bem-sucedido:", response);
         } catch (error) {
             console.error("Erro ao fazer login:", error.message);
         }
+
+        setFormData({
+            email: "",
+            password: ""
+        })
     };
 
-    return(
+    return (
         <>
-        <form onSubmit={handleSubmit}>
-        <h1>Entrar</h1>
+            <form onSubmit={handleSubmit}>
+                <h1>Entrar</h1>
 
-        <label htmlFor="email">Email: </label>
-        <input type="text" name='email' value={formData.email} onChange={handleInputChange}/>
+                <label htmlFor="email">Email: </label>
+                <input type="text" name='email' value={formData.email} onChange={handleInputChange} />
 
-        <label htmlFor='password'>Senha: </label>
-        <input type="text" name='password' value={formData.password} onChange={handleInputChange}/>
-        
-        <button type='submit'>Entrar</button>
-        </form>
+                <label htmlFor='password'>Senha: </label>
+                <input type="text" name='password' value={formData.password} onChange={handleInputChange} />
+
+                <button type='submit'>Entrar</button>
+            </form>
         </>
     )
 }

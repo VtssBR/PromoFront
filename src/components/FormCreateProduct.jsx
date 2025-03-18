@@ -46,7 +46,7 @@ export default function FormCreateProduct() {
         event.preventDefault();
 
         const productData = {
-            userId: "f8caafaa-3c04-4da4-aef8-63e0295ab3f8", //Retirar depois de validar o login 
+            userId: "ea3ae9df-81d6-443c-83d7-52fc9f53d855", //Retirar depois de validar o login 
             title: formData.title,
             price: parseFloat(formData.price) || 0,
             categoryId: formData.categoryId,
