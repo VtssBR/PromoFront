@@ -7,11 +7,13 @@ export const getProducts = async () => {
 };
 
 export const addProduct = async (newProduct) => {
-    const token = localStorage.getItem("token"); 
-    const response = await fetch(URL, {
+    const token = localStorage.getItem("token");
+    const response = await fetch(URL,{
         method: "POST",
-        headers: { 'Content-Type': 'application/json','Authorization': `Bearer ${token}` },
-        body: JSON.stringify(newProduct),
+        body: newProduct,
+        headers: {
+            "Authorization": `Bearer ${token}`,
+        },
     });
     if (!response.ok) throw new Error("Falha ao criar produto");
     return response.json();

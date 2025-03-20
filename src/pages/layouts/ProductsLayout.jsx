@@ -1,9 +1,18 @@
 import { Outlet } from "react-router-dom";
 
-export default function ProductsLayout(){
+export default function ProductsLayout() {
     return (
         <>
-            <Outlet/>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100vh",
+                }}
+            >
+                <Outlet />
+            </div>
         </>
     )
 }

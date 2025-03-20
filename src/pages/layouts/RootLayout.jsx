@@ -30,12 +30,12 @@ export default function RootLayout() {
     return (
         <>
             <header style={{ display: "flex", alignItems: "center", gap: "10px" }} >
+                <Link to="/">
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <Link to="/">
                         <img src="/img/logoIcon.png" alt="logo" style={{ height: "50px" }} />
-                    </Link>
-                    <p style={{ fontSize: "20px", fontWeight: "bold" }}>PROMO</p>
+                    <p style={{ fontSize: "20px", fontWeight: "bold", color:"white" }}>PROMO</p>
                 </div>
+                </Link>
                 <nav>
                     <input type="text" />
                     <button onClick={handlePostClick}>Postar  Promocao</button>
