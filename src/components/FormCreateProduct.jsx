@@ -45,7 +45,7 @@ export default function FormCreateProduct() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const productData = new FormData(); // Crie um novo FormData
+    const productData = new FormData(); 
     productData.append("userId", "ea3ae9df-81d6-443c-83d7-52fc9f53d855"); 
     productData.append("title", formData.title);
     productData.append("price", formData.price); 
@@ -54,17 +54,17 @@ export default function FormCreateProduct() {
     productData.append("expiresAt", formData.expiresAt);
 
     if (formData.image) {
-        productData.append("image", formData.image); // Adiciona a imagem ao FormData
+        productData.append("image", formData.image); 
     }
 
     try {
-        await createProductState(productData); // Envia o FormData
+        await createProductState(productData); 
         setFormData({
             title: "",
             price: "",
             categoryId: "",
             description: "",
-            image: null, // Altere para null ao invés de "" para arquivos
+            image: null, 
             expiresAt: ""
         });
     } catch (error) {

@@ -17,9 +17,9 @@ export default function CardProduct() {
         const publicId = product.publicId;
     
         try {
-            await deleteProductState(id, publicId); // Exclui o produto
+            await deleteProductState(id, publicId); 
             setIsDeleted(true);
-            navigate("/"); // Redireciona após a exclusão
+            navigate("/"); 
             window.location.reload();
         } catch (error) {
             console.error("Erro ao excluir produto:", error);
@@ -29,7 +29,7 @@ export default function CardProduct() {
 
     useEffect(() => {
         if (!isDeleted) {
-            getProductByIdState(id); // Busca o produto apenas se não tiver sido excluído
+            getProductByIdState(id); 
         }
     }, [id, getProductByIdState]);
 

@@ -7,7 +7,7 @@ export default function ListCardsProducts() {
 
     return (
         <div>
-            {products.length === 0 ? ( // Exibe mensagem caso não haja produtos
+            {products.length === 0 ? ( 
                 <p>Nenhum produto encontrado.</p>
             ) : (
                 products.map((product) => (
