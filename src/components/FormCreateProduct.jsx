@@ -1,11 +1,13 @@
 import { useContext, useState } from "react";
 import { ProductContext } from "../context/ProductContext";
 import { CategoryContext } from "../context/CategoryContext";
+import { UserContext } from "../context/UserContext";
 
 
 export default function FormCreateProduct() {
   const { createProductState } = useContext(ProductContext);
   const { categories } = useContext(CategoryContext)
+  const { user } = useContext(UserContext)
 
   const [formData, setFormData] = useState({
     title: "",
@@ -45,8 +47,10 @@ export default function FormCreateProduct() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    console.log(user.id)
+
     const productData = new FormData(); 
-    productData.append("userId", "ea3ae9df-81d6-443c-83d7-52fc9f53d855"); 
+    productData.append("userId", String(user.id)); 
     productData.append("title", formData.title);
     productData.append("price", formData.price); 
     productData.append("categoryId", formData.categoryId);

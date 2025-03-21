@@ -9,10 +9,8 @@ export default function RootLayout() {
     const navigate = useNavigate();
 
 
-
     const handlePostClick = () => {
 
-        console.log("Estado atual de user:", user);
         if (!user) {
             navigate("/login"); 
             return;

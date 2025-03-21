@@ -26,21 +26,22 @@ export default function FormUserLogin() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        console.log("Dados enviados para login:", formData);
 
         try {
             const response = await loginUserState(formData);
             console.log("Login bem-sucedido:", response);
+            setFormData({
+                email: "",
+                password: ""
+            })
+            navigate("/")
         } catch (error) {
             console.error("Erro ao fazer login:", error.message);
+            setFormData({
+                email: "",
+                password: ""
+            })
         }
-
-        setFormData({
-            email: "",
-            password: ""
-        })
-
-        navigate("/")
     };
 
     return (
