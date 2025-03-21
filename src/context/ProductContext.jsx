@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react"
-import { addProduct, getProducts, attProduct, getProductById} from "../services/ProductsService"
+import { addProduct, getProducts, attProduct, getProductById, deleteProduct} from "../services/ProductsService"
 
 
 export const ProductContext = createContext({});
@@ -55,10 +55,19 @@ export const ProductProvider = ({ children }) => {
         }
     };
 
+    const deleteProductState = async (id, publicId) => {
+        try {
+            await deleteProduct(id, publicId);
+            setProducts((prevProducts) => prevProducts.filter(product => product.id !== id));
+        } catch (error) {
+            setError(error.message);
+        }
+    }
+
 
    
     return (
-        <ProductContext.Provider value={{products, product,  error, createProductState, updateProductState, getProductByIdState,}}>
+        <ProductContext.Provider value={{products, product,  error, createProductState, updateProductState, getProductByIdState, deleteProductState}}>
           {children}
         </ProductContext.Provider>
       );

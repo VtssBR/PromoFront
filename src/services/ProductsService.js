@@ -38,8 +38,8 @@ export const getProductById = async (id) => {
     return response.json();
 };
 
-export const deleteProduct = async (id) => {
-    const response = await fetch(`${URL}/${id}`, {
+export const deleteProduct = async (id , publicId) => {
+    const response = await fetch(`${URL}/${id}?publicId=${publicId}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
     });

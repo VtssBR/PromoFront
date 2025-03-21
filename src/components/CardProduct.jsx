@@ -1,18 +1,39 @@
-import { useContext, useEffect } from "react"
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState} from "react"
+import { useNavigate, useParams } from "react-router-dom";
 import { ProductContext } from "../context/ProductContext"
 
 
+
+
 export default function CardProduct() {
-    const { product, getProductByIdState } = useContext(ProductContext)
+    const { product, getProductByIdState, deleteProductState} = useContext(ProductContext)
     const { id } = useParams();
+    const navigate = useNavigate()
+    const [isDeleted, setIsDeleted] = useState(false);
+
+    const handleDelete = async (event) => {
+        event.preventDefault();
+        
+        const publicId = product.publicId;
+    
+        try {
+            await deleteProductState(id, publicId); // Exclui o produto
+            setIsDeleted(true);
+            navigate("/"); // Redireciona após a exclusão
+            window.location.reload();
+        } catch (error) {
+            console.error("Erro ao excluir produto:", error);
+        }
+    };
 
 
     useEffect(() => {
-        getProductByIdState(id);
+        if (!isDeleted) {
+            getProductByIdState(id); // Busca o produto apenas se não tiver sido excluído
+        }
     }, [id, getProductByIdState]);
 
-    if (!product) return <p>Carregando...</p>; //Futuramente criar um componente de carregando
+    if (!product) return <p>Carregando</p>; //Futuramente criar um componente de carregando
 
     return (
         <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
@@ -26,6 +47,8 @@ export default function CardProduct() {
                 <p>{product.description}</p>
                 <p>R$ {product.price}</p>
                 <p>Válido até: {product.expiresAt}</p>
+                <button onClick={handleDelete}>Excluir</button>
+                
             </div>
         </div>
     );
