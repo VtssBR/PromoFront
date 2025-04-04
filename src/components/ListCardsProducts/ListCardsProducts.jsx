@@ -15,10 +15,11 @@ export default function ListCardsProducts() {
                     <div key={product.id} className={styles.card}>
                         <img src={product.image} alt={product.title} className={styles.image} />
                         <div className={styles.textContent}>
-                            <h4 className={styles.title}>{product.title}</h4>
-                            <h4 className={styles.price}>R$ {product.price}</h4>
+                            <h3 className={styles.title}>{product.title}</h3>
+                            <h4 className={styles.description}>{product.description}</h4>
                         </div>
                         <div className={styles.buttonContainer}>
+                            <h4 className={styles.price}>R$ {product.price}</h4>
                             <Link to={`/products/${product.id}`}>
                                 <button className={styles.button}>Visualizar</button>
                             </Link>

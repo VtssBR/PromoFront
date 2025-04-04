@@ -24,23 +24,25 @@ export default function RootLayout() {
   return (
     <>
       <header className={styles.header}>
-        <Link to="/" className={styles.logoContainer}>
-          <img src="/img/logoIcon.png" alt="logo" className={styles.logoImage} />
-          <p className={styles.logoText}>PROMO</p>
-        </Link>
+        <div className={styles.headerContent}>
+          <Link to="/" className={styles.logoContainer}>
+            <img src="/img/logoIcon.png" alt="logo" className={styles.logoImage} />
+            <p className={styles.logoText}>PROMO</p>
+          </Link>
 
-        <nav className={styles.nav}>
-          <input type="text" />
-          <button onClick={handlePostClick}>Postar Promocao</button>
+          <nav className={styles.nav}>
+            <input type="text" />
+            <button onClick={handlePostClick}>Postar Promocao</button>
 
-          {!user && (
-            <Link to="/login">
-              <button>Área de Usuário</button>
-            </Link>
-          )}
+            {!user && (
+              <Link to="/login">
+                <button>Área de Usuário</button>
+              </Link>
+            )}
 
-          {user && <button onClick={handleLogout}>Sair</button>}
-        </nav>
+            {user && <button onClick={handleLogout}>Sair</button>}
+          </nav>
+        </div>
       </header>
 
       <Outlet />

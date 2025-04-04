@@ -1,11 +1,19 @@
 .header {
+  background-color: var(--background-color);
+  box-shadow: 0 4px 8px var(--card-shadow);
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+
+
+.headerContent {
   display: flex;
   align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 8px var(--card-shadow);
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: var(--background-color);
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  width: 100%;
 }
 
 .logoContainer {
@@ -32,14 +40,14 @@
   color: var(--text-light);
 }
 
-nav {
+.nav {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-left: auto;
 }
 
-nav input {
+.nav input {
   padding: 4px 8px;
   border: 1px solid var(--secondary-color);
   background-color: var(--card-background);
@@ -47,7 +55,7 @@ nav input {
   border-radius: 4px;
 }
 
-nav button {
+.nav button {
   padding: 10px 20px;
   cursor: pointer;
   font-size: 15px;
@@ -58,6 +66,6 @@ nav button {
   border-radius: 5px;
   transition: background-color 0.3s;
 }
-nav button:hover {
+.nav button:hover {
   background-color: var(--primary-dark);
 }
