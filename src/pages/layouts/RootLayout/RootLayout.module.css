@@ -1,0 +1,63 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 8px var(--card-shadow);
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: var(--background-color);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+.logoContainer:hover {
+  background-color: var(--primary-dark);
+}
+
+.logoImage {
+  height: 30px;
+}
+
+.logoText {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--text-light);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+nav input {
+  padding: 4px 8px;
+  border: 1px solid var(--secondary-color);
+  background-color: var(--card-background);
+  color: var(--text-color);
+  border-radius: 4px;
+}
+
+nav button {
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+nav button:hover {
+  background-color: var(--primary-dark);
+}

@@ -1,9 +1,8 @@
-import ListCardsProducts from "../../components/ListCardsProducts"
+import ListCardsProducts from "../../components/ListCardsProducts/ListCardsProducts"
 
 export default function ListProduct() {
     return (
         <div>
-            <h1>Listar</h1>
             <ListCardsProducts />
         </div>
     )
