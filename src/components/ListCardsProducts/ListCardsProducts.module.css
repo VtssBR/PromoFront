@@ -55,7 +55,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-weight: bold;
   }
   
   .description {
@@ -66,6 +65,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.5em;
+    color: rgb(170, 170, 170);
   }
   
   .price {

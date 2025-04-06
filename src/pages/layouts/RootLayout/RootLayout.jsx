@@ -4,7 +4,7 @@ import { UserContext } from "../../../context/UserContext";
 import styles from "./RootLayout.module.css";
 
 export default function RootLayout() {
-  const { user, logout } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext); 
   const navigate = useNavigate();
 
   const handlePostClick = () => {
@@ -17,8 +17,8 @@ export default function RootLayout() {
 
   const handleLogout = () => {
     logout();
-    window.location.reload();
     navigate("/");
+    window.location.reload();
   };
 
   return (
@@ -31,8 +31,8 @@ export default function RootLayout() {
           </Link>
 
           <nav className={styles.nav}>
-            <input type="text" />
-            <button onClick={handlePostClick}>Postar Promocao</button>
+            <input type="text" placeholder="Buscar..." />
+            <button onClick={handlePostClick}>Postar Promoção</button>
 
             {!user && (
               <Link to="/login">
@@ -40,7 +40,9 @@ export default function RootLayout() {
               </Link>
             )}
 
-            {user && <button onClick={handleLogout}>Sair</button>}
+            {user && (
+              <button onClick={handleLogout}>Sair</button>
+            )}
           </nav>
         </div>
       </header>

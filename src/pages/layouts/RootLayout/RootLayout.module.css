@@ -2,7 +2,6 @@
   background-color: var(--background-color);
   box-shadow: 0 4px 8px var(--card-shadow);
   padding: 10px 0;
-  margin-bottom: 10px;
 }
 
 
@@ -35,9 +34,9 @@
 }
 
 .logoText {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 25px;
   color: var(--text-light);
+  font-weight: bold;
 }
 
 .nav {
