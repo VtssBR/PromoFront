@@ -27,11 +27,9 @@ export default function RootLayout() {
         <div className={styles.headerContent}>
           <Link to="/" className={styles.logoContainer}>
             <img src="/img/logoIcon.png" alt="logo" className={styles.logoImage} />
-            <p className={styles.logoText}>PROMO</p>
           </Link>
 
           <nav className={styles.nav}>
-            <input type="text" placeholder="Buscar..." />
             <button onClick={handlePostClick}>Postar Promoção</button>
 
             {!user && (

@@ -15,6 +15,7 @@ export default function FormCreateProduct() {
     categoryId: "",
     description: "",
     image: "",
+    address:"",
     expiresAt: "",
   });
 
@@ -43,6 +44,7 @@ export default function FormCreateProduct() {
     productData.append("categoryId", formData.categoryId);
     productData.append("description", formData.description);
     productData.append("expiresAt", formData.expiresAt);
+    productData.append("address", formData.address);
 
     if (formData.image) {
       productData.append("image", formData.image);
@@ -56,6 +58,7 @@ export default function FormCreateProduct() {
         categoryId: "",
         description: "",
         image: null,
+        address:"",
         expiresAt: "",
       });
     } catch (error) {
@@ -107,6 +110,15 @@ export default function FormCreateProduct() {
         onChange={handleInputChange}
         className={`${styles.input} ${styles.textarea}`}
       ></textarea>
+
+      <label htmlFor="address" className={styles.label}>Endereco:</label>
+      <input
+        type="text"
+        name="address"
+        value={formData.address}
+        onChange={handleInputChange}
+        className={styles.input}
+      />
 
       <label htmlFor="image" className={styles.label}>Imagem:</label>
       <div className={styles.imageContainer}>

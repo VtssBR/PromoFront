@@ -26,17 +26,12 @@
   transition: background-color 0.3s;
 }
 .logoContainer:hover {
-  background-color: var(--primary-dark);
+  transform: scale(1.1); 
+  transition: transform 0.3s ease;
 }
 
 .logoImage {
-  height: 30px;
-}
-
-.logoText {
-  font-size: 25px;
-  color: var(--text-light);
-  font-weight: bold;
+  width: 150px;
 }
 
 .nav {

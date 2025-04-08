@@ -57,19 +57,22 @@
     text-overflow: ellipsis;
   }
   
-  .description {
+  .address {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-size: 0.95rem;
+    color: var(--secondary-color);
+    margin-top: 90px;
     text-align: left;
-    margin: 0;
-    max-height: 4.5em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.5em;
-    color: rgb(170, 170, 170);
+  }
+  
+  .locationIcon{
+    width: 20px;
   }
   
   .price {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: var(--primary-color);
     text-align: left;

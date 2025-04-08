@@ -50,7 +50,7 @@ export default function FormUserLogin() {
                 onSubmit={handleSubmit}
                 className="max-w-[350px] w-full p-5 border border-gray-300 rounded-lg shadow-md flex flex-col gap-2 font-sans"
             >
-                <h1 className="text-center text-xl font-semibold">Fazer Login</h1>
+                <h1 className="text-center text-xl font-semibold">Login</h1>
 
                 <label htmlFor="email" className="font-bold">
                     Email:

@@ -8,7 +8,7 @@ export default function ListCardsProducts() {
 
     return (
         <div className={styles.container}>
-            {products.length === 0 ? ( 
+            {products.length === 0 ? (
                 <p className={styles.noProducts}>Nenhum produto encontrado.</p>
             ) : (
                 products.map((product) => (
@@ -16,7 +16,10 @@ export default function ListCardsProducts() {
                         <img src={product.image} alt={product.title} className={styles.image} />
                         <div className={styles.textContent}>
                             <h3 className={styles.title}>{product.title}</h3>
-                            <h4 className={styles.description}>{product.description}</h4>
+                            <div className={styles.address}>
+                                <img  className={styles.locationIcon} src="/img/locationIcon.png" alt="pino de localizacao" />
+                                <span>{product.address?.split(',').slice(0, 3).join(',')}</span>
+                            </div>
                         </div>
                         <div className={styles.buttonContainer}>
                             <h4 className={styles.price}>R$ {product.price}</h4>
