@@ -1,22 +1,37 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import { useJsApiLoader, StandaloneSearchBox } from "@react-google-maps/api";
 import { ProductContext } from "../../context/ProductContext";
 import { CategoryContext } from "../../context/CategoryContext";
 import { UserContext } from "../../context/UserContext";
 import styles from "./FormCreateProduct.module.css";
+
+const libraries = ["places"];
 
 export default function FormCreateProduct() {
   const { createProductState } = useContext(ProductContext);
   const { categories } = useContext(CategoryContext);
   const { user } = useContext(UserContext);
 
+  const [addressSelected, setAddressSelected] = useState(false);
+  const searchBoxRef = useRef(null);
+  const inputTextRef = useRef(null);
+
   const [formData, setFormData] = useState({
     title: "",
     price: "",
     categoryId: "",
     description: "",
-    image: "",
-    address:"",
+    image: null,
+    address: "",
+    latitude: null,
+    longitude: null,
     expiresAt: "",
+  });
+
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
+    libraries,
   });
 
   const handleInputChange = (event) => {
@@ -34,8 +49,30 @@ export default function FormCreateProduct() {
     setFormData((prev) => ({ ...prev, categoryId }));
   };
 
+  const handleOnPlacesChanged = () => {
+    const places = searchBoxRef.current.getPlaces();
+  
+    if (places && places.length > 0) {
+      const place = places[0];
+      if (place.formatted_address && place.geometry) {
+        setFormData((prev) => ({
+          ...prev,
+          address: place.formatted_address,
+          latitude: place.geometry.location.lat(),
+          longitude: place.geometry.location.lng(),
+        }));
+        setAddressSelected(true);
+      }
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!addressSelected) {
+      alert("Por favor, selecione um endereço da lista.");
+      return;
+    }
 
     const productData = new FormData();
     productData.append("userId", String(user.id));
@@ -45,6 +82,8 @@ export default function FormCreateProduct() {
     productData.append("description", formData.description);
     productData.append("expiresAt", formData.expiresAt);
     productData.append("address", formData.address);
+    productData.append("latitude", formData.latitude);
+    productData.append("longitude", formData.longitude);
 
     if (formData.image) {
       productData.append("image", formData.image);
@@ -52,15 +91,24 @@ export default function FormCreateProduct() {
 
     try {
       await createProductState(productData);
+
       setFormData({
         title: "",
         price: "",
         categoryId: "",
         description: "",
         image: null,
-        address:"",
+        address: "",
+        latitude: null,
+        longitude: null,
         expiresAt: "",
       });
+
+      if (inputTextRef.current) {
+        inputTextRef.current.value = "";
+      }
+
+      setAddressSelected(false); 
     } catch (error) {
       console.error("Erro ao criar produto:", error);
     }
@@ -111,14 +159,21 @@ export default function FormCreateProduct() {
         className={`${styles.input} ${styles.textarea}`}
       ></textarea>
 
-      <label htmlFor="address" className={styles.label}>Endereco:</label>
-      <input
-        type="text"
-        name="address"
-        value={formData.address}
-        onChange={handleInputChange}
-        className={styles.input}
-      />
+      <label htmlFor="address" className={styles.label}>Endereço:</label>
+      {isLoaded && (
+        <StandaloneSearchBox
+          onLoad={(ref) => (searchBoxRef.current = ref)}
+          onPlacesChanged={handleOnPlacesChanged}
+        >
+          <input
+            ref={inputTextRef}
+            type="text"
+            placeholder="Digite o endereço"
+            className={styles.input}
+            onChange={() => setAddressSelected(false)} 
+          />
+        </StandaloneSearchBox>
+      )}
 
       <label htmlFor="image" className={styles.label}>Imagem:</label>
       <div className={styles.imageContainer}>

@@ -44,8 +44,6 @@ export default function CardProduct() {
                 <p className="text-lg text-green-600 font-medium mb-2">R$ {product.price}</p>
                 <p className="text-sm text-gray-600 mb-1">Válido até: {product.expiresAt}</p>
                 <p className="text-sm text-gray-600 mb-1">Endereço: {product.address}</p>
-                <p className="text-sm text-gray-600 mb-1">Latitude: {product.latitude}</p>
-                <p className="text-sm text-gray-600 mb-4">Longitude: {product.longitude}</p>
                 
                 <button 
                     onClick={handleDelete}
