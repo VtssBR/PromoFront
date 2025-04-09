@@ -63,3 +63,36 @@
 .nav button:hover {
   background-color: var(--primary-dark);
 }
+
+.footer {
+  background-color: var(--background-color);
+  box-shadow: 0 -4px 8px var(--card-shadow);
+  padding: 10px 0;
+  margin-top: 40px;
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 15px;
+}
+
+.footerLinks a {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footerLinks a:hover {
+  color: var(--primary-color);
+}

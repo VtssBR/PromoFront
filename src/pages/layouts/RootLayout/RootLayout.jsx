@@ -4,7 +4,7 @@ import { UserContext } from "../../../context/UserContext";
 import styles from "./RootLayout.module.css";
 
 export default function RootLayout() {
-  const { user, logout } = useContext(UserContext); 
+  const { user, logout } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handlePostClick = () => {
@@ -47,8 +47,14 @@ export default function RootLayout() {
 
       <Outlet />
 
-      <footer>
-        <h4>Rodapé</h4>
+      <footer className={styles.footer}>
+        <div className={styles.footerContent}>
+          <p>©Promodomo {new Date().getFullYear()}</p>
+          <div className={styles.footerLinks}>
+            <Link to="/sobre">Sobre</Link>
+            <Link to="/contato">Contato</Link>
+          </div>
+        </div>
       </footer>
     </>
   );
