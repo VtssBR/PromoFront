@@ -2,11 +2,18 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProductContext } from "../context/ProductContext";
 
+
 export default function CardProduct() {
     const { product, getProductByIdState, deleteProductState } = useContext(ProductContext);
     const { id } = useParams();
     const navigate = useNavigate();
     const [isDeleted, setIsDeleted] = useState(false);
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        return new Intl.DateTimeFormat('pt-BR', options).format(date);
+    };
 
     const handleDelete = async (event) => {
         event.preventDefault();
@@ -42,7 +49,7 @@ export default function CardProduct() {
                 <h2 className="text-2xl font-semibold text-primary-dark mb-2">{product.title}</h2>
                 <p className="text-gray-700 mb-2">{product.description}</p>
                 <p className="text-lg text-green-600 font-medium mb-2">R$ {product.price}</p>
-                <p className="text-sm text-gray-600 mb-1">Válido até: {product.expiresAt}</p>
+                <p className="text-sm text-gray-600 mb-1">Válido até: {formatDate(product.expiresAt)}</p>
                 <p className="text-sm text-gray-600 mb-1">Endereço: {product.address}</p>
                 
                 <button 

@@ -3,6 +3,7 @@ import { useJsApiLoader, StandaloneSearchBox } from "@react-google-maps/api";
 import { ProductContext } from "../../context/ProductContext";
 import { CategoryContext } from "../../context/CategoryContext";
 import { UserContext } from "../../context/UserContext";
+import { NumericFormat } from 'react-number-format';
 import styles from "./FormCreateProduct.module.css";
 
 const libraries = ["places"];
@@ -11,7 +12,6 @@ export default function FormCreateProduct() {
   const { createProductState } = useContext(ProductContext);
   const { categories } = useContext(CategoryContext);
   const { user } = useContext(UserContext);
-
   const [addressSelected, setAddressSelected] = useState(false);
   const searchBoxRef = useRef(null);
   const inputTextRef = useRef(null);
@@ -51,7 +51,7 @@ export default function FormCreateProduct() {
 
   const handleOnPlacesChanged = () => {
     const places = searchBoxRef.current.getPlaces();
-  
+
     if (places && places.length > 0) {
       const place = places[0];
       if (place.formatted_address && place.geometry) {
@@ -108,7 +108,7 @@ export default function FormCreateProduct() {
         inputTextRef.current.value = "";
       }
 
-      setAddressSelected(false); 
+      setAddressSelected(false);
     } catch (error) {
       console.error("Erro ao criar produto:", error);
     }
@@ -128,12 +128,22 @@ export default function FormCreateProduct() {
       />
 
       <label htmlFor="price" className={styles.label}>Preço:</label>
-      <input
-        type="number"
+      <NumericFormat
+        className={styles.input}
         name="price"
         value={formData.price}
-        onChange={handleInputChange}
-        className={styles.input}
+        onValueChange={(values) => {
+          setFormData((prev) => ({
+            ...prev,
+            price: values.value 
+          }));
+        }}
+        thousandSeparator="."
+        decimalSeparator=","
+        prefix="R$ "
+        allowNegative={false}
+        decimalScale={2}
+        fixedDecimalScale
       />
 
       <label htmlFor="categoryId" className={styles.label}>Categoria:</label>
@@ -170,7 +180,7 @@ export default function FormCreateProduct() {
             type="text"
             placeholder="Digite o endereço"
             className={styles.input}
-            onChange={() => setAddressSelected(false)} 
+            onChange={() => setAddressSelected(false)}
           />
         </StandaloneSearchBox>
       )}

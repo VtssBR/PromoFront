@@ -16,13 +16,15 @@ export default function ListCardsProducts() {
                         <img src={product.image} alt={product.title} className={styles.image} />
                         <div className={styles.textContent}>
                             <h3 className={styles.title}>{product.title}</h3>
+                            <h4 className={styles.price}>
+                            {(product.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                            </h4>
                             <div className={styles.address}>
-                                <img  className={styles.locationIcon} src="/img/locationIcon.png" alt="pino de localizacao" />
+                                <img className={styles.locationIcon} src="/img/locationIcon.png" alt="pino de localizacao" />
                                 <span>{product.address?.split(',').slice(0, 3).join(',')}</span>
                             </div>
                         </div>
                         <div className={styles.buttonContainer}>
-                            <h4 className={styles.price}>R$ {product.price}</h4>
                             <Link to={`/products/${product.id}`}>
                                 <button className={styles.button}>Visualizar</button>
                             </Link>
