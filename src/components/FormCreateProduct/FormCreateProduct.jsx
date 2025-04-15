@@ -75,7 +75,7 @@ export default function FormCreateProduct() {
     }
 
     const productData = new FormData();
-    productData.append("userId", String(user.id));
+    productData.append("userId", String(user.userId));
     productData.append("title", formData.title);
     productData.append("price", formData.price);
     productData.append("categoryId", formData.categoryId);
@@ -91,6 +91,7 @@ export default function FormCreateProduct() {
 
     try {
       await createProductState(productData);
+      
 
       setFormData({
         title: "",

@@ -25,18 +25,25 @@ export const UserProvider = ({ children }) => {
         setError(error.message);
       }
     };
-
+  
+    const checkToken = () => {
+      const token = localStorage.getItem("token");
+  
+      if (token && isTokenValid(token)) {
+        const decoded = jwtDecode(token);
+        setUser({ ...decoded, token });
+      } else {
+        localStorage.removeItem("token");
+        setUser(null);
+      }
+    };
+  
     fetchData();
-
-    const token = localStorage.getItem("token");
-
-    if (token && isTokenValid(token)) {
-      const decoded = jwtDecode(token);
-      setUser({ ...decoded, token });
-    } else {
-      localStorage.removeItem("token");
-      setUser(null);
-    }
+    checkToken(); 
+  
+    const interval = setInterval(checkToken, 2 * 60 * 1000); 
+  
+    return () => clearInterval(interval); 
   }, []);
 
   const isTokenValid = (token) => {
@@ -69,10 +76,14 @@ export const UserProvider = ({ children }) => {
 
   const loginUserState = async (formData) => {
     try {
-      const { user, token } = await loginUser(formData);
-      setUser(user);
+      const { token } = await loginUser(formData);
+      const decoded = jwtDecode(token);
+      
+      const completeUser = { ...decoded, token };
+  
+      setUser(completeUser);
       localStorage.setItem("token", token);
-      return { user, token };
+      return completeUser;
     } catch (error) {
       setError(error.message);
       throw error;

@@ -39,7 +39,7 @@ export default function CardProduct() {
     if (!product) return <p className="text-center text-gray-600">Carregando...</p>;
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+        <div className="flex p-4">
             <div className="bg-white shadow-lg rounded-2xl p-6 w-full max-w-xl">
                 <img 
                     src={product.image} 
@@ -47,8 +47,8 @@ export default function CardProduct() {
                     className="w-full h-64 object-cover rounded-xl mb-4 border border-gray-200" 
                 />
                 <h2 className="text-2xl font-semibold text-primary-dark mb-2">{product.title}</h2>
+                <p className="text-lg text-green-600 font-medium mb-2">{(product.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                 <p className="text-gray-700 mb-2">{product.description}</p>
-                <p className="text-lg text-green-600 font-medium mb-2">R$ {product.price}</p>
                 <p className="text-sm text-gray-600 mb-1">Válido até: {formatDate(product.expiresAt)}</p>
                 <p className="text-sm text-gray-600 mb-1">Endereço: {product.address}</p>
                 
