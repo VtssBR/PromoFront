@@ -52,6 +52,7 @@
 
 .title {
   font-size: 1.125rem;
+  font-weight: bold;
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -93,18 +94,19 @@
 }
 
 .button {
-  background-color: var(--primary-color);
-  color: white;
+  color: var(--primary-color);
   border: none;
-  padding: 10px 20px;
+  padding: 5px 8px;
   cursor: pointer;
   border-radius: 5px;
   font-size: 0.8rem;
-  transition: background-color 0.3s;
+  font-weight: 700;
+  border: 2px solid var(--primary-color);
+  transition: 0.3s;
 }
 
 .button:hover {
-  background-color: var(--primary-dark);
+  transform: scale(1.1);
 }
 
 /* Responsividade */

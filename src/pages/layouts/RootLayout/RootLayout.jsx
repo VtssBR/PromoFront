@@ -30,16 +30,25 @@ export default function RootLayout() {
           </Link>
 
           <nav className={styles.nav}>
+          
+          <div className={styles.buttonIcon}>
+          <img className={styles.menuImg} src="/img/addPromo.png" alt="adicionar promo"/>
             <button onClick={handlePostClick}>Postar Promoção</button>
-
+            </div>
             {!user && (
               <Link to="/login">
+                <div className={styles.buttonIcon}>
+                <img className={styles.menuImg} src="img/user.png" alt="area de usuario" />
                 <button>Área de Usuário</button>
+                </div>
               </Link>
             )}
 
             {user && (
+              <div className={styles.buttonIcon}>
+              <img className={styles.menuImg} src="/img/logout.png" alt="logout" />
               <button onClick={handleLogout}>Sair</button>
+              </div>
             )}
           </nav>
         </div>
