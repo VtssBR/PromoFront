@@ -17,7 +17,7 @@ export default function ListCardsProducts() {
                         <div className={styles.textContent}>
                             <h3 className={styles.title}>{product.title}</h3>
                             <h4 className={styles.price}>
-                            {(product.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                {(product.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                             </h4>
                             <div className={styles.address}>
                                 <img className={styles.locationIcon} src="/img/locationIcon.png" alt="pino de localizacao" />
@@ -25,8 +25,9 @@ export default function ListCardsProducts() {
                             </div>
                         </div>
                         <div className={styles.buttonContainer}>
-                            <Link to={`/products/${product.id}`}>
-                                <button className={styles.button}>Visualizar</button>
+                            <Link to={`/products/${product.id}`} className={styles.buttonIcon}>
+                                <span>Detalhes</span>
+                                <img className={styles.imgIcon} src="/img/setadireita.png" alt="seta direita" />
                             </Link>
                         </div>
                     </div>

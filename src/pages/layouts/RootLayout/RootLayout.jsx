@@ -2,9 +2,11 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../../context/UserContext";
 import styles from "./RootLayout.module.css";
+import { useState } from "react";
 
 export default function RootLayout() {
   const { user, logout } = useContext(UserContext);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const handlePostClick = () => {
@@ -29,25 +31,30 @@ export default function RootLayout() {
             <img src="/img/logoIcon.png" alt="logo" className={styles.logoImage} />
           </Link>
 
-          <nav className={styles.nav}>
-          
-          <div className={styles.buttonIcon}>
-          <img className={styles.menuImg} src="/img/addPromo.png" alt="adicionar promo"/>
-            <button onClick={handlePostClick}>Postar Promoção</button>
+          <button
+            className={styles.menuToggle}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <img src="/img/menu.png" alt="menu" />
+          </button>
+
+          <nav className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
+            <div className={styles.buttonIcon} onClick={handlePostClick}>
+              <img className={styles.menuImg} src="/img/addPromo.png" alt="adicionar promo" />
+              <span>Postar Promoção</span>
             </div>
             {!user && (
               <Link to="/login">
                 <div className={styles.buttonIcon}>
-                <img className={styles.menuImg} src="img/user.png" alt="area de usuario" />
-                <button>Área de Usuário</button>
+                  <img className={styles.menuImg} src="img/user.png" alt="area de usuario" />
+                  <span>Login</span>
                 </div>
               </Link>
             )}
-
             {user && (
-              <div className={styles.buttonIcon}>
-              <img className={styles.menuImg} src="/img/logout.png" alt="logout" />
-              <button onClick={handleLogout}>Sair</button>
+              <div className={styles.buttonIcon} onClick={handleLogout}>
+                <img className={styles.menuImg} src="/img/logout.png" alt="logout" />
+                <span>Sair</span>
               </div>
             )}
           </nav>
