@@ -1,17 +1,17 @@
 import { useContext, useRef, useState } from "react";
-import { useJsApiLoader, StandaloneSearchBox } from "@react-google-maps/api";
 import { ProductContext } from "../../context/ProductContext";
 import { CategoryContext } from "../../context/CategoryContext";
 import { UserContext } from "../../context/UserContext";
+import { GoogleMapsContext } from "../../context/GoogleMapsContext";
 import { NumericFormat } from 'react-number-format';
+import { StandaloneSearchBox } from '@react-google-maps/api';
 import styles from "./FormCreateProduct.module.css";
-
-const libraries = ["places"];
 
 export default function FormCreateProduct() {
   const { createProductState } = useContext(ProductContext);
   const { categories } = useContext(CategoryContext);
   const { user } = useContext(UserContext);
+  const { isLoaded } = useContext(GoogleMapsContext);
   const [addressSelected, setAddressSelected] = useState(false);
   const searchBoxRef = useRef(null);
   const inputTextRef = useRef(null);
@@ -28,11 +28,6 @@ export default function FormCreateProduct() {
     expiresAt: "",
   });
 
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-    libraries,
-  });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
