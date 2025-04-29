@@ -46,7 +46,7 @@ export default function RootLayout() {
             {!user && (
               <Link to="/login">
                 <div className={styles.buttonIcon}>
-                  <img className={styles.menuImg} src="img/user.png" alt="area de usuario" />
+                  <img className={styles.menuImg} src="img/userLogin.png" alt="login" />
                   <span>Login</span>
                 </div>
               </Link>

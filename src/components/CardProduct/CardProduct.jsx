@@ -3,14 +3,14 @@ import { useParams } from "react-router-dom";
 import { ProductContext } from "../../context/ProductContext";
 import { GoogleMapsContext } from "../../context/GoogleMapsContext";
 import { GoogleMap, Marker } from '@react-google-maps/api';
-import styles from './CardProduct.module.css'; 
+import styles from './CardProduct.module.css';
 
 export default function CardProduct() {
     const { product, getProductByIdState } = useContext(ProductContext);
     const { id } = useParams();
     const { isLoaded } = useContext(GoogleMapsContext);
 
-    const [mapCenter, setMapCenter] = useState(null); 
+    const [mapCenter, setMapCenter] = useState(null);
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -20,7 +20,7 @@ export default function CardProduct() {
 
     useEffect(() => {
         getProductByIdState(id);
-        
+
     }, [id, getProductByIdState]);
 
     useEffect(() => {
@@ -37,19 +37,39 @@ export default function CardProduct() {
     return (
         <div className={styles.productPage}>
             <div className={styles.productContainer}>
-                <img
-                    src={product.image}
-                    alt={product.title}
-                    className={styles.productImage}
-                />
-                <h2 className={styles.productTitle}>{product.title}</h2>
-                <p className={styles.productPrice}>
-                    {(product.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-                </p>
-                <p className={styles.productDescription}>{product.description}</p>
-                <p className={styles.productValidUntil}>Válido até: {formatDate(product.expiresAt)}</p>
-                <p className={styles.productAddress}>Endereço: {product.address}</p>
-                
+                <div className={styles.productMain}>
+                    <img
+                        src={product.image}
+                        alt={product.title}
+                        className={styles.productImage}
+                    />
+
+                    <div className={styles.productContent}>
+                        <h2 className={styles.productTitle}>{product.title}</h2>
+                        <p className={styles.productPrice}>
+                            {(product.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                        </p>
+                        <div className={styles.infoBlock}>
+                            <img className={styles.infoIcon} src="/img/locationIcon.png" alt="pino de localização" />
+                            <span>Endereço: {product.address}</span>
+                        </div>
+
+                        <div className={styles.infoBlock}>
+                            <img className={styles.infoIcon} src="/img/relogio.png" alt="relógio" />
+                            <span>Válido até: {formatDate(product.expiresAt)}</span>
+                        </div>
+
+                        <div className={styles.productObservation}>
+                            Observação: a validade da promoção é uma estimativa informada pelo usuário. Consulte a loja.
+                        </div>
+
+                        <div className={styles.infoBlock}>
+                            <img className={styles.infoIcon} src="/img/info.png" alt="informação" />
+                            <span>Descrição: {product.description}</span>
+                        </div>
+                    </div>
+                </div>
+
                 {isLoaded && mapCenter && (
                     <div className={styles.mapContainer}>
                         <GoogleMap

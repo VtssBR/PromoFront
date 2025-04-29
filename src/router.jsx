@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom"
 import RootLayout from "./pages/layouts/RootLayout/RootLayout";
 import RegisterUser from "./pages/auth/RegisterUser";
 import LoginUser from "./pages/auth/LoginUser";
-import ProductsLayout from "./pages/layouts/ProductsLayout";
 import ListProducts from "./pages/products/ListProducts";
 import ShowProduct from "./pages/products/ShowProduct";
 import CreateProduct from "./pages/products/CreateProduct";
@@ -15,16 +14,10 @@ const router = createBrowserRouter([{
         { index: true, element: <ListProducts /> },
         { path: "register", element: <RegisterUser /> },
         { path: "login", element: <LoginUser /> },
-
-        {
-            path: "products", element: <ProductsLayout />,
-            children: [
-                { path: ":id", element: <ShowProduct /> },
-                { path: "new", element: <CreateProduct /> },
-                { path: ":id/update", element: <UpdateProduct /> }
-            ]
-        }
+        { path: "products/:id", element: <ShowProduct /> },
+        { path: "products/new", element: <CreateProduct /> },
+        { path: "products/:id/update", element: <UpdateProduct /> }
     ]
-}])
+}]);
 
 export default router;
