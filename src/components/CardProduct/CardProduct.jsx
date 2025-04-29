@@ -20,16 +20,17 @@ export default function CardProduct() {
 
     useEffect(() => {
         getProductByIdState(id);
+        
     }, [id, getProductByIdState]);
 
     useEffect(() => {
-        if (product?.latitude && product?.longitude) {
+        if (product?.id === id && product.latitude && product.longitude) {
             setMapCenter({
                 lat: Number(product.latitude),
                 lng: Number(product.longitude)
             });
         }
-    }, [product]);
+    }, [id, product?.id, product?.latitude, product?.longitude]);
 
     if (!product) return <p className={styles.loading}>Carregando...</p>;
 
@@ -57,7 +58,6 @@ export default function CardProduct() {
                             zoom={15}
                             options={{
                                 disableDefaultUI: true,
-                                zoomControl: true,
                                 draggable: true,
                                 gestureHandling: "greedy",
                             }}
