@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, useCallback } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ProductContext } from "../../context/ProductContext";
 import { GoogleMapsContext } from "../../context/GoogleMapsContext";
@@ -18,9 +18,19 @@ export default function CardProduct() {
         return new Intl.DateTimeFormat('pt-BR', options).format(date);
     };
 
+    const copyToClipboard = (text) => {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                alert("Endereço copiado para a área de transferência!");
+            })
+            .catch(err => {
+                alert("Falha ao copiar o endereço!");
+                console.error("Erro ao copiar: ", err);
+            });
+    };
+
     useEffect(() => {
         getProductByIdState(id);
-
     }, [id, getProductByIdState]);
 
     useEffect(() => {
@@ -38,54 +48,66 @@ export default function CardProduct() {
         <div className={styles.productPage}>
             <div className={styles.productContainer}>
                 <div className={styles.productMain}>
-                    <img
-                        src={product.image}
-                        alt={product.title}
-                        className={styles.productImage}
-                    />
+                    <div className={styles.leftColumn}>
+                        <img
+                            src={product.image}
+                            alt={product.title}
+                            className={styles.productImage}
+                        />
 
+                    </div>
                     <div className={styles.productContent}>
                         <h2 className={styles.productTitle}>{product.title}</h2>
                         <p className={styles.productPrice}>
-                            {(product.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                            {(product.price).toLocaleString('pt-BR', {
+                                style: 'currency',
+                                currency: 'BRL'
+                            })}
                         </p>
-                        <div className={styles.infoBlock}>
-                            <img className={styles.infoIcon} src="/img/locationIcon.png" alt="pino de localização" />
-                            <span>Endereço: {product.address}</span>
-                        </div>
 
                         <div className={styles.infoBlock}>
                             <img className={styles.infoIcon} src="/img/relogio.png" alt="relógio" />
-                            <span>Válido até: {formatDate(product.expiresAt)}</span>
+                            <span><b>Válido até: </b>{formatDate(product.expiresAt)}</span>
                         </div>
 
                         <div className={styles.productObservation}>
-                            Observação: a validade da promoção é uma estimativa informada pelo usuário. Consulte a loja.
+                            <b>Observação: </b>Validade da promoção é uma estimativa informada pelo usuário. Consulte a loja.
                         </div>
 
                         <div className={styles.infoBlock}>
                             <img className={styles.infoIcon} src="/img/info.png" alt="informação" />
-                            <span>Descrição: {product.description}</span>
+                            <span><b>Descrição: </b>{product.description}</span>
                         </div>
+
+                        <div className={styles.infoBlockAddress} onClick={() => copyToClipboard(product.address)}>
+                            <img className={styles.infoIcon} src="/img/locationIcon.png" alt="pino de localização" />
+                            <span><b>Endereço: </b>{product.address}</span>
+                        </div>
+
+                        {isLoaded && mapCenter && (
+                            <div
+                                className={
+                                    styles.mapContainer +
+                                    " " +
+                                    (window.innerWidth < 768 ? styles.mapMobile : "")
+                                }
+                            >
+                                <GoogleMap
+                                    mapContainerStyle={{ width: "100%", height: "100%" }}
+                                    center={mapCenter}
+                                    zoom={15}
+                                    options={{
+                                        disableDefaultUI: true,
+                                        draggable: true,
+                                        gestureHandling: "greedy",
+                                    }}
+                                >
+                                    <Marker position={mapCenter} />
+                                </GoogleMap>
+                            </div>
+                        )}
                     </div>
                 </div>
-
-                {isLoaded && mapCenter && (
-                    <div className={styles.mapContainer}>
-                        <GoogleMap
-                            mapContainerStyle={{ width: "100%", height: "100%" }}
-                            center={mapCenter}
-                            zoom={15}
-                            options={{
-                                disableDefaultUI: true,
-                                draggable: true,
-                                gestureHandling: "greedy",
-                            }}
-                        >
-                            <Marker position={mapCenter} />
-                        </GoogleMap>
-                    </div>
-                )}
             </div>
         </div>
     );

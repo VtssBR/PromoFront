@@ -1,8 +1,7 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../../context/UserContext";
 import styles from "./RootLayout.module.css";
-import { useState } from "react";
 
 export default function RootLayout() {
   const { user, logout } = useContext(UserContext);
@@ -38,21 +37,33 @@ export default function RootLayout() {
             <img src="/img/menu.png" alt="menu" />
           </button>
 
-          <nav className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
-            <div className={styles.buttonIcon} onClick={handlePostClick}>
+          <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}>
+            <div
+              className={styles.buttonIcon}
+              onClick={handlePostClick}
+              role="button"
+              tabIndex={0}
+              aria-label="Postar uma nova promoção"
+            >
               <img className={styles.menuImg} src="/img/addPromo.png" alt="adicionar promo" />
               <span>Postar Promoção</span>
             </div>
             {!user && (
               <Link to="/login">
                 <div className={styles.buttonIcon}>
-                  <img className={styles.menuImg} src="img/userLogin.png" alt="login" />
+                  <img className={styles.menuImg} src="/img/userLogin.png" alt="login" />
                   <span>Login</span>
                 </div>
               </Link>
             )}
             {user && (
-              <div className={styles.buttonIcon} onClick={handleLogout}>
+              <div
+                className={styles.buttonIcon}
+                onClick={handleLogout}
+                role="button"
+                tabIndex={0}
+                aria-label="Fazer logout"
+              >
                 <img className={styles.menuImg} src="/img/logout.png" alt="logout" />
                 <span>Sair</span>
               </div>

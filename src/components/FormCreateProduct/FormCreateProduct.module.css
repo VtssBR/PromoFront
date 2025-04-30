@@ -89,6 +89,7 @@
   .form {
     padding: 1rem;
     margin: 1rem;
+    max-width: 325px;
   }
 
   .imageContainer {
