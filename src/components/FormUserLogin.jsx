@@ -29,14 +29,12 @@ export default function FormUserLogin() {
 
         try {
             const response = await loginUserState(formData);
-            console.log("Login bem-sucedido:", response);
             setFormData({
                 email: "",
                 password: ""
             })
             navigate("/")
         } catch (error) {
-            console.error("Erro ao fazer login:", error.message);
             setFormData({
                 email: "",
                 password: ""

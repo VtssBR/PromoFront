@@ -152,6 +152,7 @@
       width: 60%;
       margin-left: 15px;
       text-align: left;
+      
   }
 
   .price {
@@ -169,10 +170,12 @@
   .textContent {
       align-items: center;
       text-align: center;
+      max-width: 200px;
   }
 
   .title, .description, .price, .date {
       text-align: center;
+      max-width: 200px;
   }
 
   .buttonContainer {
