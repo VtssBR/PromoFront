@@ -1,4 +1,4 @@
-import FormUserRegister from "../../components/FormUserRegister";
+import FormUserRegister from "../../components/FormUserRegister/FormUserRegister";
 
 export default function RegisterUser(){
     return(

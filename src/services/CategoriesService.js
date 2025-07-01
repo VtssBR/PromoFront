@@ -1,4 +1,6 @@
-const URL = "http://localhost:3000/api/categories"; //Criar URL .env quando finalizado 
+const BASE_URL = import.meta.env.VITE_API_URL;
+
+const URL = `${BASE_URL}/categories` 
 
 export const getCategories = async () => {
     const response = await fetch(URL);

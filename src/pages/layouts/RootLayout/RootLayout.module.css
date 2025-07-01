@@ -30,7 +30,7 @@
 }
 
 .logoImage {
-  width: 120px;
+  width: 100px;
 }
 
 .nav {
@@ -40,20 +40,11 @@
   margin-left: auto;
 }
 
-.nav input {
-  padding: 4px 8px;
-  border: 1px solid var(--secondary-color);
-  background-color: var(--card-background);
-  color: var(--text-color);
-  border-radius: 4px;
-}
-
 .buttonIcon {
   display: flex;
-  border: 2px solid var(--primary-color);
   border-radius: 5px;
   transition: 0.3s;
-  padding: 5px 8px;
+  padding: 3px 8px;
   cursor: pointer;
   font-size: 15px;
   font-weight: bold;

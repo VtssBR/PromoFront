@@ -1,4 +1,4 @@
-import FormUserLogin from "../../components/FormUserLogin"
+import FormUserLogin from "../../components/FormUserLogin/FormUserLogin"
 
 export default function LoginUser(){
     return(

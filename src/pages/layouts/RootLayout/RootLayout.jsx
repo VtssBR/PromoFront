@@ -79,7 +79,7 @@ export default function RootLayout() {
           <p>©Promodomo {new Date().getFullYear()}</p>
           <div className={styles.footerLinks}>
             <Link to="/sobre">Sobre</Link>
-            <Link to="/contato">Contato</Link>
+            <Link to="/contato">Termos</Link>
           </div>
         </div>
       </footer>

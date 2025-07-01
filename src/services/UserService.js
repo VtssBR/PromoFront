@@ -1,6 +1,9 @@
-const URL = "http://localhost:3000/api/users" //Criar URL .env quando finalizado 
-const URLAUTHLOGIN = "http://localhost:3000/api/authentication/login"
-const URLAUTHREGISTER = "http://localhost:3000/api/authentication/register"
+const BASE_URL = import.meta.env.VITE_API_URL;
+
+const URL = `${BASE_URL}/users`
+
+const URLAUTHLOGIN = `${BASE_URL}/authentication/login`
+const URLAUTHREGISTER = `${BASE_URL}/authentication/register`
 
 export const getUsers = async () => {
     const response =  await fetch(URL)
