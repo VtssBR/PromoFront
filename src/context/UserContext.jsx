@@ -62,6 +62,7 @@ export const UserProvider = ({ children }) => {
       setUsers((prevUsers) => [...prevUsers, newUser]);
     } catch (error) {
       setError(error.message);
+      throw error;
     }
   };
 

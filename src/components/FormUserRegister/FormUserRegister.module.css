@@ -37,6 +37,26 @@
     font-weight: bold;
 }
 
+.termos{
+  color: grey;
+  text-align: center;
+  font-size: 0.7rem;
+}
+.error {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.success {
+    color: green;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+
+
 .button {
   background-color: var(--primary-color);
   color: white;
