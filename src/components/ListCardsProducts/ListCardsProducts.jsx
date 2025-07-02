@@ -2,9 +2,11 @@ import { useContext } from "react";
 import { ProductContext } from "../../context/ProductContext";
 import { Link } from "react-router-dom";
 import styles from "./ListCardsProducts.module.css";
+import { UserContext } from "../../context/UserContext";
 
 export default function ListCardsProducts() {
-    const { products } = useContext(ProductContext);
+    const { products, deleteProductState } = useContext(ProductContext);
+    const { user } = useContext(UserContext);
 
     return (
         <div className={styles.container}>
@@ -29,6 +31,14 @@ export default function ListCardsProducts() {
                                 <span>Detalhes</span>
                                 <img className={styles.imgIcon} src="/img/setadireita.png" alt="seta direita" />
                             </Link>
+                            {user?.role === "admin" && (
+                                <button
+                                    className={styles.buttonIcon}
+                                    onClick={() => deleteProductState(product.id, product.publicId)}
+                                >
+                                    Excluir
+                                </button>
+                            )}
                         </div>
                     </div>
                 ))

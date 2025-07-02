@@ -41,9 +41,10 @@ export const getProductById = async (id) => {
 };
 
 export const deleteProduct = async (id , publicId) => {
+    const token = localStorage.getItem("token");
     const response = await fetch(`${URL}/${id}?publicId=${publicId}`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json," , "Authorization": `Bearer ${token}`},
     });
     if (!response.ok) throw new Error("Erro ao excluir produto");
     return response.json();
