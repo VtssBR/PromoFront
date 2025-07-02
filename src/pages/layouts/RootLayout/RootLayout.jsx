@@ -76,10 +76,12 @@ export default function RootLayout() {
 
       <footer className={styles.footer}>
         <div className={styles.footerContent}>
-          <p>©Promodomo {new Date().getFullYear()}</p>
+          <div className={styles.logoCubeContainer}>
+              <img className={styles.logoFooter} src="/img/logoCube.png" alt="logo"/>
+              <span className={styles.tagName}>©Promodomo {new Date().getFullYear()}</span>
+          </div>
           <div className={styles.footerLinks}>
-            <Link to="/sobre">Sobre</Link>
-            <Link to="/contato">Termos</Link>
+            <Link to="/terms">Termos</Link>
           </div>
         </div>
       </footer>

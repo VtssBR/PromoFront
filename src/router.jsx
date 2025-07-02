@@ -6,12 +6,14 @@ import ListProducts from "./pages/products/ListProducts";
 import ShowProduct from "./pages/products/ShowProduct";
 import CreateProduct from "./pages/products/CreateProduct";
 import UpdateProduct from "./pages/products/UpdateProduct";
+import Terms from "./pages/footer/Terms/Terms";
 
 const router = createBrowserRouter([{
     path: "/",
     element: <RootLayout />,
     children: [
         { index: true, element: <ListProducts /> },
+        { path: "terms", element: <Terms/> },
         { path: "register", element: <RegisterUser /> },
         { path: "login", element: <LoginUser /> },
         { path: "products/:id", element: <ShowProduct /> },

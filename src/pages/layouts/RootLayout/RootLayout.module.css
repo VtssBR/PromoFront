@@ -53,6 +53,18 @@
   align-items: center;
 }
 
+.logoCubeContainer{
+  display: flex;
+  align-items: center;
+}
+
+.tagName{
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  align-items: center;
+}
+
 .menuImg {
   height: 15px;
 }
@@ -93,19 +105,26 @@
   font-size: 14px;
 }
 
+.logoFooter{
+  height: 28px;
+}
+
 .footerLinks {
   display: flex;
   gap: 15px;
 }
 
 .footerLinks a {
-  color: var(--text-color);
+  color: var(--primary-color);
   text-decoration: none;
   transition: color 0.3s;
+  font-weight: bold;
+  font-size: 0.8rem;
 }
 
 .footerLinks a:hover {
-  color: var(--primary-color);
+  transform: scale(1.1);
+  transition: 0.3s;
 }
 
 @media (max-width: 768px) {

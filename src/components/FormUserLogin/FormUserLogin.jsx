@@ -97,7 +97,7 @@ export default function FormUserLogin() {
 
                 <Link to="/register" className={styles.link}>Fazer cadastro</Link>
 
-                <span className={styles.termos}>Ao continuar, você concorda com os Termos de uso</span>
+                <span className={styles.termos}>Ao continuar, você concorda com os <Link to="/terms" className={styles.link}>Termos de uso</Link></span>
             </form>
         </div>
     )
