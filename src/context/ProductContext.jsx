@@ -21,6 +21,10 @@ export const ProductProvider = ({ children }) => {
             }
         }
         fetchData()
+
+         const intervalId = setInterval(fetchData, 30000);
+
+        return () => clearInterval(intervalId);
     }, [])
 
 
