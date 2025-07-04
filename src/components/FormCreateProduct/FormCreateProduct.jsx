@@ -11,6 +11,7 @@ import styles from "./FormCreateProduct.module.css";
 export default function FormCreateProduct() {
   const [message, setMessage] = useState(null);
   const [messageType, setMessageType] = useState(null);
+  const [isPosting, setIsPosting] = useState(false);
   const { createProductState } = useContext(ProductContext);
   const { categories } = useContext(CategoryContext);
   const { user } = useContext(UserContext);
@@ -72,6 +73,8 @@ export default function FormCreateProduct() {
       return;
     }
 
+    setIsPosting(true);
+
     const productData = new FormData();
     productData.append("userId", String(user.userId));
     productData.append("title", formData.title);
@@ -125,6 +128,8 @@ export default function FormCreateProduct() {
       setMessage("Ocorreu um erro ao postar o produto.");
       setMessageType("error");
 
+    } finally {
+      setIsPosting(false);
       setTimeout(() => {
         setMessage(null);
         setMessageType(null);
@@ -134,7 +139,7 @@ export default function FormCreateProduct() {
 
   return (
     <>
-      
+
 
       <form onSubmit={handleSubmit} className={styles.form}>
 
@@ -235,9 +240,21 @@ export default function FormCreateProduct() {
           className={styles.input}
         />
 
-        <button type="submit" className={styles.submitButton}>
-          Postar
+        <button
+          type="submit"
+          className={styles.submitButton}
+          disabled={isPosting}
+        >
+          {isPosting ? (
+            <>
+              Postando...
+              <span className={styles.spinner}></span>
+            </>
+          ) : (
+            "Postar"
+          )}
         </button>
+
       </form>
       {message && (
         <div
