@@ -109,7 +109,6 @@ export default function FormCreateProduct() {
 
       setAddressSelected(false);
 
-      window.scrollTo({ top: 0, behavior: "smooth" });
 
       setMessage("Produto postado com sucesso!");
       setMessageType("success");
@@ -123,8 +122,6 @@ export default function FormCreateProduct() {
     } catch (error) {
       console.error("Erro ao criar produto:", error);
 
-      window.scrollTo({ top: 0, behavior: "smooth" });
-
       setMessage("Ocorreu um erro ao postar o produto.");
       setMessageType("error");
 
@@ -137,14 +134,7 @@ export default function FormCreateProduct() {
 
   return (
     <>
-      {message && (
-        <div
-          className={`${styles.alert} ${messageType === "success" ? styles.success : styles.error
-            }`}
-        >
-          {message}
-        </div>
-      )}
+      
 
       <form onSubmit={handleSubmit} className={styles.form}>
 
@@ -249,6 +239,14 @@ export default function FormCreateProduct() {
           Postar
         </button>
       </form>
+      {message && (
+        <div
+          className={`${styles.alert} ${messageType === "success" ? styles.success : styles.error
+            }`}
+        >
+          {message}
+        </div>
+      )}
     </>
   );
 }
