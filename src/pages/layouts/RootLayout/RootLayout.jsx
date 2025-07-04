@@ -1,5 +1,5 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
+import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../../context/UserContext";
 import styles from "./RootLayout.module.css";
 
@@ -7,6 +7,7 @@ export default function RootLayout() {
   const { user, logout } = useContext(UserContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const navRef = useRef(null);  
 
   const handlePostClick = () => {
     if (!user) {
@@ -21,6 +22,19 @@ export default function RootLayout() {
     navigate("/");
     window.location.reload();
   };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  
 
   return (
     <>
@@ -37,7 +51,10 @@ export default function RootLayout() {
             <img src="/img/menu.png" alt="menu" />
           </button>
 
-          <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}>
+          <nav
+            ref={navRef}
+            className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}
+          >
             <div
               className={styles.buttonIcon}
               onClick={handlePostClick}
@@ -48,6 +65,7 @@ export default function RootLayout() {
               <img className={styles.menuImg} src="/img/addPromo.png" alt="adicionar promo" />
               <span>Postar Promoção</span>
             </div>
+
             {!user && (
               <Link to="/login">
                 <div className={styles.buttonIcon}>
@@ -56,6 +74,7 @@ export default function RootLayout() {
                 </div>
               </Link>
             )}
+
             {user && (
               <div
                 className={styles.buttonIcon}
@@ -77,8 +96,8 @@ export default function RootLayout() {
       <footer className={styles.footer}>
         <div className={styles.footerContent}>
           <div className={styles.logoCubeContainer}>
-              <img className={styles.logoFooter} src="/img/logoCube.png" alt="logo"/>
-              <span className={styles.tagName}>©Promodomo {new Date().getFullYear()}</span>
+            <img className={styles.logoFooter} src="/img/logoCube.png" alt="logo" />
+            <span className={styles.tagName}>©Promodomo {new Date().getFullYear()}</span>
           </div>
           <div className={styles.footerLinks}>
             <Link to="/terms">Termos</Link>
