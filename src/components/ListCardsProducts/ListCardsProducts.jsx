@@ -14,7 +14,7 @@ export default function ListCardsProducts() {
         setVisibleCount((prev) => prev + 10);
     };
 
-    const visibleProducts = products.slice(0, visibleCount);
+    const visibleProducts = [...products].reverse().slice(0, visibleCount);
 
     return (
         <div className={styles.container}>
